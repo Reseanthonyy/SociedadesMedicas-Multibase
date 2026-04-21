@@ -1,0 +1,93 @@
+############################################
+# .NET / Build output
+############################################
+bin/
+obj/
+[Bb]in/
+[Oo]bj/
+
+# Build results
+*.dll
+*.exe
+*.pdb
+*.cache
+*.log
+
+############################################
+# Rider / JetBrains
+############################################
+.idea/
+*.sln.iml
+*.DotSettings.user
+
+# Rider local history
+.idea/**/workspace.xml
+.idea/**/tasks.xml
+.idea/**/usage.statistics.xml
+.idea/**/dictionaries
+.idea/**/shelf
+
+############################################
+# Visual Studio (por compatibilidad)
+############################################
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+############################################
+# Avalonia UI (runtime / tooling)
+############################################
+# Avalonia hot reload / build artifacts
+avalonia-data/
+*.avalonia.g.cs
+
+############################################
+# NuGet
+############################################
+*.nupkg
+.nuget/
+packages/
+project.lock.json
+project.assets.json
+*.nuget.props
+*.nuget.targets
+
+# NuGet fallback folder
+**/packages/*
+
+############################################
+# Local configuration / secrets
+############################################
+appsettings.Development.json
+appsettings.Local.json
+secrets.json
+*.Secrets.json
+
+# User secrets (ASP.NET / .NET Core)
+secrets.dev.json
+
+############################################
+# OS files
+############################################
+.DS_Store
+Thumbs.db
+
+############################################
+# Logs / runtime data
+############################################
+*.log
+logs/
+
+############################################
+# Test results
+############################################
+TestResults/
+*.trx
+
+############################################
+# Avalonia / UI designer caches
+############################################
+*.axaml.g.cs
+*.xaml.g.cs

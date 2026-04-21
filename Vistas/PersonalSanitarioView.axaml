@@ -1,0 +1,32 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:modelos="clr-namespace:MedicasMultibase.Modelos"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="MedicasMultibase.Vistas.PersonalSanitarioView">
+    <Grid RowDefinitions="*, Auto" Margin="5">
+        
+        <DataGrid Grid.Row="0" Name="GridPersonalSanitario" 
+                  x:DataType="modelos:PersonalSanitario" 
+                  AutoGenerateColumns="False" IsReadOnly="True" 
+                  GridLinesVisibility="Horizontal" BorderThickness="1" 
+                  BorderBrush="#E0E0E0" RowBackground="White">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Nodo (Origen)" Binding="{Binding OrigenDatos}" FontWeight="Bold" Foreground="#B71C1C"/>
+                <DataGridTextColumn Header="Cod Empleado" Binding="{Binding CodigoEmpleado}" />
+                <DataGridTextColumn Header="Función" Binding="{Binding Funcion}" Width="*" />
+                <DataGridTextColumn Header="Años Experiencia" Binding="{Binding AniosExperiencia}" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Spacing="10" HorizontalAlignment="Right">
+            <Button Content="Eliminar" Width="100" HorizontalContentAlignment="Center" 
+                    Background="White" Foreground="#D32F2F" BorderBrush="#D32F2F" BorderThickness="1" Cursor="Hand"/>
+            <Button Content="Editar" Width="100" HorizontalContentAlignment="Center" 
+                    Background="#E0E0E0" Foreground="#333333" BorderThickness="0" Cursor="Hand"/>
+            <Button Content="Asignar Función" Width="140" HorizontalContentAlignment="Center" 
+                    Background="#D32F2F" Foreground="White" FontWeight="SemiBold" BorderThickness="0" Cursor="Hand"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

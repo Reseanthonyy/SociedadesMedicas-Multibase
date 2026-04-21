@@ -1,0 +1,35 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             xmlns:modelos="using:MedicasMultibase.Modelos"
+             x:Class="MedicasMultibase.Vistas.NominasView">
+    <Grid RowDefinitions="*, Auto" Margin="5">
+        
+        <DataGrid Grid.Row="0" Name="GridNominas" 
+                  x:DataType="modelos:Nomina" 
+                  AutoGenerateColumns="False" IsReadOnly="True" 
+                  GridLinesVisibility="Horizontal" BorderThickness="1" 
+                  BorderBrush="#E0E0E0" RowBackground="White">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Nodo (Origen)" Binding="{Binding OrigenDatos}" FontWeight="Bold" Foreground="#B71C1C"/>
+                <DataGridTextColumn Header="Cod Nómina" Binding="{Binding CodigoNomina}" />
+                <DataGridTextColumn Header="Centro" Binding="{Binding CodigoCentro}" />
+                <DataGridTextColumn Header="Empleado" Binding="{Binding CodigoEmpleado}" />
+                <DataGridTextColumn Header="Especialidad" Binding="{Binding CodigoEspecialidad}" />
+                <DataGridTextColumn Header="Salario Base" Binding="{Binding Salario, StringFormat={}{0:C2}}" Width="*" />
+                <DataGridTextColumn Header="Fecha Emisión" Binding="{Binding FechaConsulta}" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Spacing="10" HorizontalAlignment="Right">
+            <Button Content="Anular Nómina" Width="130" HorizontalContentAlignment="Center" 
+                    Background="White" Foreground="#D32F2F" BorderBrush="#D32F2F" BorderThickness="1" Cursor="Hand"/>
+            <Button Content="Revisar" Width="100" HorizontalContentAlignment="Center" 
+                    Background="#E0E0E0" Foreground="#333333" BorderThickness="0" Cursor="Hand"/>
+            <Button Content="Generar Nómina" Width="140" HorizontalContentAlignment="Center" 
+                    Background="#D32F2F" Foreground="White" FontWeight="SemiBold" BorderThickness="0" Cursor="Hand"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

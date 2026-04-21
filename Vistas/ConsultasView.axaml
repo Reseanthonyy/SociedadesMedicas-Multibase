@@ -1,0 +1,34 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             xmlns:modelos="using:MedicasMultibase.Modelos"
+             x:Class="MedicasMultibase.Vistas.ConsultasView">
+    <Grid RowDefinitions="*, Auto" Margin="5">
+        
+        <DataGrid Grid.Row="0" Name="GridConsultas" 
+                  x:DataType="modelos:Consulta" 
+                  AutoGenerateColumns="False" IsReadOnly="True" 
+                  GridLinesVisibility="Horizontal" BorderThickness="1" 
+                  BorderBrush="#E0E0E0" RowBackground="White">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Nodo (Origen)" Binding="{Binding OrigenDatos}" FontWeight="Bold" Foreground="#B71C1C"/>
+                <DataGridTextColumn Header="Centro" Binding="{Binding CodigoCentro}" />
+                <DataGridTextColumn Header="Médico" Binding="{Binding CodigoEmpleado}" />
+                <DataGridTextColumn Header="Especialidad" Binding="{Binding CodigoEspecialidad}" />
+                <DataGridTextColumn Header="Día" Binding="{Binding DiaSemana}" Width="*" />
+                <DataGridTextColumn Header="Hora" Binding="{Binding Hora}" Width="*" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Spacing="10" HorizontalAlignment="Right">
+            <Button Content="Cancelar Consulta" Width="150" HorizontalContentAlignment="Center" 
+                    Background="White" Foreground="#D32F2F" BorderBrush="#D32F2F" BorderThickness="1" Cursor="Hand"/>
+            <Button Content="Reprogramar" Width="120" HorizontalContentAlignment="Center" 
+                    Background="#E0E0E0" Foreground="#333333" BorderThickness="0" Cursor="Hand"/>
+            <Button Content="Agendar Nueva" Width="140" HorizontalContentAlignment="Center" 
+                    Background="#D32F2F" Foreground="White" FontWeight="SemiBold" BorderThickness="0" Cursor="Hand"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

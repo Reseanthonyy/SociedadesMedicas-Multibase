@@ -1,0 +1,125 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="600"
+             xmlns:modelos="using:MedicasMultibase.Modelos"
+             x:Class="MedicasMultibase.Vistas.CentrosView"
+             Background="White">
+
+    <Grid RowDefinitions="Auto, *, Auto" Margin="15">
+
+        <!-- FORMULARIO -->
+        <Border Grid.Row="0" BorderBrush="#E0E0E0" BorderThickness="1"
+                CornerRadius="4" Padding="15" Margin="0,0,0,15"
+                Background="#FAFAFA">
+
+            <!-- 👇 AHORA 4 FILAS -->
+            <Grid RowDefinitions="Auto, Auto, Auto, Auto"
+                  ColumnDefinitions="*, *">
+
+                <TextBlock Grid.Row="0" Grid.ColumnSpan="2"
+                           Text="Registrar Nuevo Centro"
+                           FontWeight="Bold"
+                           FontSize="16"
+                           Foreground="#B71C1C"
+                           Margin="0,0,0,15"/>
+
+                <!-- NOMBRE -->
+                <StackPanel Grid.Row="1" Grid.Column="0" Margin="0,0,15,15">
+                    <TextBlock Text="Nombre" FontWeight="SemiBold"
+                               Foreground="#333333" Margin="0,0,0,5"/>
+                    <TextBox Name="txtNombreCentro"
+                             Watermark="Nombre de la sucursal"
+                             Background="White"/>
+                </StackPanel>
+
+                <!-- TELEFONO -->
+                <StackPanel Grid.Row="1" Grid.Column="1" Margin="0,0,0,15">
+                    <TextBlock Text="Teléfono" FontWeight="SemiBold"
+                               Foreground="#333333" Margin="0,0,0,5"/>
+                    <TextBox Name="txtTelefono"
+                             Watermark="Ej. 555-0123"
+                             Background="White"/>
+                </StackPanel>
+
+                <!-- DIRECCION -->
+                <StackPanel Grid.Row="2" Grid.Column="0"
+                            Grid.ColumnSpan="2" Margin="0,0,0,15">
+                    <TextBlock Text="Dirección" FontWeight="SemiBold"
+                               Foreground="#333333" Margin="0,0,0,5"/>
+                    <TextBox Name="txtDireccion"
+                             Watermark="Calle, Número, Colonia, Ciudad"
+                             Background="White"/>
+                </StackPanel>
+
+                <!-- BOTÓN GUARDAR -->
+                <Button Grid.Row="3" Grid.ColumnSpan="2"
+                        Content="Guardar Centro"
+                        Name="btnGuardar"
+                        Click="BtnGuardar_OnClick"
+                        HorizontalAlignment="Right"
+                        Width="180"
+                        Background="#D32F2F"
+                        Foreground="White"
+                        FontWeight="SemiBold"
+                        BorderThickness="0"
+                        Cursor="Hand"/>
+
+            </Grid>
+        </Border>
+
+        <!-- DATAGRID -->
+        <DataGrid Grid.Row="1"
+                  Name="GridCentros"
+                  x:DataType="modelos:Centro"
+                  AutoGenerateColumns="False"
+                  IsReadOnly="True"
+                  GridLinesVisibility="Horizontal"
+                  BorderThickness="1"
+                  BorderBrush="#E0E0E0"
+                  RowBackground="White"
+                  Margin="0,0,0,15">
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Nodo (Origen)"
+                                    Binding="{Binding OrigenDatos}"
+                                    FontWeight="Bold"
+                                    Foreground="#B71C1C"/>
+                <DataGridTextColumn Header="Nombre"
+                                    Binding="{Binding NombreCentro}"
+                                    Width="*" />
+                <DataGridTextColumn Header="Dirección"
+                                    Binding="{Binding Direccion}"
+                                    Width="2*" />
+                <DataGridTextColumn Header="Teléfono"
+                                    Binding="{Binding Telefono}" />
+            </DataGrid.Columns>
+
+        </DataGrid>
+
+        <!-- BOTONES ACCIONES -->
+        <StackPanel Grid.Row="2"
+                    Orientation="Horizontal"
+                    Spacing="10"
+                    HorizontalAlignment="Right">
+
+            <Button Content="Eliminar Seleccionado"
+                    Width="160"
+                    Background="White"
+                    Foreground="#D32F2F"
+                    BorderBrush="#D32F2F"
+                    BorderThickness="1"
+                    Cursor="Hand"/>
+
+            <Button Content="Editar Seleccionado"
+                    Width="160"
+                    Background="#E0E0E0"
+                    Foreground="#333333"
+                    BorderThickness="0"
+                    Cursor="Hand"/>
+
+        </StackPanel>
+
+    </Grid>
+</UserControl>

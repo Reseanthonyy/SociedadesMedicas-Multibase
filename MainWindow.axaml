@@ -1,0 +1,61 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vistas="using:MedicasMultibase.Vistas"
+        x:Class="MedicasMultibase.MainWindow"
+        Title="Sistema Médico Distribuido"
+        Width="1000" Height="650"
+        Background="White"
+        WindowStartupLocation="CenterScreen">
+
+    <Grid RowDefinitions="Auto, Auto, *">
+        
+        <Border Grid.Row="0" Background="#B71C1C" Padding="20,15">
+            <Grid ColumnDefinitions="*, Auto">
+                <TextBlock Grid.Column="0" Text="PANEL DE ADMINISTRACIÓN MULTIBASE" 
+                           Foreground="White" FontSize="20" FontWeight="Bold" 
+                           VerticalAlignment="Center"/>
+                
+                <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="10" VerticalAlignment="Center">
+                    <TextBlock Text="Estado: Conectado a la red" Foreground="#FFCDD2" VerticalAlignment="Center" FontSize="12"/>
+                    <Ellipse Width="10" Height="10" Fill="#4CAF50" />
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <Border Grid.Row="1" Background="#F5F5F5" Padding="15,10" BorderBrush="#E0E0E0" BorderThickness="0,0,0,1">
+            <StackPanel Orientation="Horizontal" Spacing="15" VerticalAlignment="Center">
+                <TextBlock Text="Fuente de Datos Activa:" FontWeight="SemiBold" VerticalAlignment="Center" Foreground="#333333"/>
+                <ComboBox Width="250" SelectedIndex="0" Background="White" SelectionChanged="SelectingItemsControl_OnSelectionChanged">
+                    <ComboBoxItem Content="Consolidado (Todas las Laptops)" Tag="Consolidado"/>
+                    <ComboBoxItem Content="Laptop Anthony" Tag="Anthony"/>
+                    <ComboBoxItem Content="Laptop Aldana" Tag="Aldana"/>
+                    <ComboBoxItem Content="Laptop Cruz" Tag="Cruz"/>
+                </ComboBox>
+                <TextBlock Text="*Las inserciones nuevas se guardarán en la base de datos Local." 
+                           FontStyle="Italic" Foreground="#757575" VerticalAlignment="Center" Margin="20,0,0,0"/>
+            </StackPanel>
+        </Border>
+
+        <TabControl Grid.Row="2" Margin="10" Background="White">
+            <TabItem Header="Centros Médicos">
+                <vistas:CentrosView />
+            </TabItem>
+            <TabItem Header="Especialidades">
+                <vistas:EspecialidadesView />
+            </TabItem>
+            <TabItem Header="Personal (General)">
+                <vistas:PersonalView />
+            </TabItem>
+            <TabItem Header="Personal Sanitario">
+                <vistas:PersonalSanitarioView />
+            </TabItem>
+            <TabItem Header="Consultas">
+                <vistas:ConsultasView />
+            </TabItem>
+            <TabItem Header="Nóminas">
+                <vistas:NominasView />
+            </TabItem>
+        </TabControl>
+
+    </Grid>
+</Window>
