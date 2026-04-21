@@ -3,30 +3,163 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:modelos="clr-namespace:MedicasMultibase.Modelos"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="MedicasMultibase.Vistas.PersonalSanitarioView">
-    <Grid RowDefinitions="*, Auto" Margin="5">
-        
-        <DataGrid Grid.Row="0" Name="GridPersonalSanitario" 
-                  x:DataType="modelos:PersonalSanitario" 
-                  AutoGenerateColumns="False" IsReadOnly="True" 
-                  GridLinesVisibility="Horizontal" BorderThickness="1" 
-                  BorderBrush="#E0E0E0" RowBackground="White">
+             mc:Ignorable="d"
+             d:DesignWidth="800"
+             d:DesignHeight="600"
+             x:Class="MedicasMultibase.Vistas.PersonalSanitarioView"
+             Background="White">
+
+    <Grid RowDefinitions="Auto, *, Auto" Margin="15">
+
+        <!-- ================= FORMULARIO ================= -->
+        <Border Grid.Row="0"
+                BorderBrush="#E0E0E0"
+                BorderThickness="1"
+                CornerRadius="4"
+                Padding="15"
+                Margin="0,0,0,15"
+                Background="#FAFAFA">
+
+            <!-- 🔥 FIX: se agregó una fila extra para el botón -->
+            <Grid RowDefinitions="Auto, Auto, Auto, Auto, Auto"
+                  ColumnDefinitions="*, *">
+
+                <TextBlock Grid.Row="0"
+                           Grid.ColumnSpan="2"
+                           Text="Registrar / Editar Personal Sanitario"
+                           FontWeight="Bold"
+                           FontSize="16"
+                           Foreground="#B71C1C"
+                           Margin="0,0,0,15"/>
+
+                <!-- EMPLEADO -->
+                <StackPanel Grid.Row="1"
+                            Grid.ColumnSpan="2"
+                            Margin="0,0,0,10">
+
+                    <TextBlock Text="Empleado"
+                               FontWeight="SemiBold"
+                               Margin="0,0,0,5"/>
+
+                    <ComboBox Name="cmbCodigoEmpleado"
+                              x:DataType="modelos:Personal"
+                              DisplayMemberBinding="{Binding Nombre}"
+                              Background="White"
+                              PlaceholderText="Selecciona un empleado"/>
+                </StackPanel>
+
+                <!-- FUNCIÓN -->
+                <StackPanel Grid.Row="2"
+                            Grid.ColumnSpan="2"
+                            Margin="0,0,0,10">
+
+                    <TextBlock Text="Función"
+                               FontWeight="SemiBold"
+                               Margin="0,0,0,5"/>
+
+                    <TextBox Name="txtFuncion"
+                             Watermark="Ej: Enfermero, Médico..."
+                             Background="White"/>
+                </StackPanel>
+
+                <!-- AÑOS EXPERIENCIA -->
+                <StackPanel Grid.Row="3"
+                            Grid.ColumnSpan="2"
+                            Margin="0,0,0,10">
+
+                    <TextBlock Text="Años de Experiencia"
+                               FontWeight="SemiBold"
+                               Margin="0,0,0,5"/>
+
+                    <TextBox Name="txtAniosExperiencia"
+                             Watermark="0"
+                             Background="White"/>
+                </StackPanel>
+
+                <!-- BOTÓN GUARDAR (CORREGIDO) -->
+                <Button Grid.Row="4"
+                        Grid.ColumnSpan="2"
+                        Content="Guardar Personal Sanitario"
+                        Name="btnGuardar"
+                        Click="BtnGuardar_OnClick"
+                        HorizontalAlignment="Right"
+                        Width="220"
+                        Background="#D32F2F"
+                        Foreground="White"
+                        FontWeight="SemiBold"
+                        BorderThickness="0"
+                        Cursor="Hand"/>
+            </Grid>
+        </Border>
+
+        <!-- ================= DATAGRID ================= -->
+        <DataGrid Grid.Row="1"
+                  Name="GridPersonalSanitario"
+                  x:DataType="modelos:PersonalSanitario"
+                  AutoGenerateColumns="False"
+                  IsReadOnly="True"
+                  GridLinesVisibility="Horizontal"
+                  BorderThickness="1"
+                  BorderBrush="#E0E0E0"
+                  RowBackground="White"
+                  Margin="0,0,0,15">
+
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Nodo (Origen)" Binding="{Binding OrigenDatos}" FontWeight="Bold" Foreground="#B71C1C"/>
-                <DataGridTextColumn Header="Cod Empleado" Binding="{Binding CodigoEmpleado}" />
-                <DataGridTextColumn Header="Función" Binding="{Binding Funcion}" Width="*" />
-                <DataGridTextColumn Header="Años Experiencia" Binding="{Binding AniosExperiencia}" />
+
+                <DataGridTextColumn Header="Nodo (Origen)"
+                                    Binding="{Binding OrigenDatos}"
+                                    FontWeight="Bold"
+                                    Foreground="#B71C1C"/>
+
+                <DataGridTextColumn Header="Cod Empleado"
+                                    Binding="{Binding CodigoEmpleado}" />
+
+                <DataGridTextColumn Header="Función"
+                                    Binding="{Binding Funcion}"
+                                    Width="*" />
+
+                <DataGridTextColumn Header="Años Experiencia"
+                                    Binding="{Binding AniosExperiencia}" />
+
             </DataGrid.Columns>
         </DataGrid>
 
-        <StackPanel Grid.Row="1" Orientation="Horizontal" Spacing="10" HorizontalAlignment="Right">
-            <Button Content="Eliminar" Width="100" HorizontalContentAlignment="Center" 
-                    Background="White" Foreground="#D32F2F" BorderBrush="#D32F2F" BorderThickness="1" Cursor="Hand"/>
-            <Button Content="Editar" Width="100" HorizontalContentAlignment="Center" 
-                    Background="#E0E0E0" Foreground="#333333" BorderThickness="0" Cursor="Hand"/>
-            <Button Content="Asignar Función" Width="140" HorizontalContentAlignment="Center" 
-                    Background="#D32F2F" Foreground="White" FontWeight="SemiBold" BorderThickness="0" Cursor="Hand"/>
+        <!-- ================= BOTONES ================= -->
+        <StackPanel Grid.Row="2"
+                    Orientation="Horizontal"
+                    Spacing="10"
+                    HorizontalAlignment="Right">
+
+            <Button Content="Eliminar"
+                    Name="btnEliminar"
+                    Click="BtnEliminar_OnClick"
+                    Width="120"
+                    Background="White"
+                    Foreground="#D32F2F"
+                    BorderBrush="#D32F2F"
+                    BorderThickness="1"
+                    Cursor="Hand"/>
+
+            <Button Content="Editar"
+                    Name="btnEditar"
+                    Click="BtnEditar_OnClick"
+                    Width="120"
+                    Background="#E0E0E0"
+                    Foreground="#333333"
+                    BorderThickness="0"
+                    Cursor="Hand"/>
+
+            <Button Content="Limpiar"
+                    Name="btnLimpiar"
+                    Click="BtnLimpiar_OnClick"
+                    Width="120"
+                    Background="White"
+                    Foreground="#D32F2F"
+                    BorderBrush="#D32F2F"
+                    BorderThickness="1"
+                    Cursor="Hand"/>
+
         </StackPanel>
+
     </Grid>
 </UserControl>

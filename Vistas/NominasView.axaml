@@ -2,34 +2,160 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              xmlns:modelos="using:MedicasMultibase.Modelos"
+             mc:Ignorable="d"
+             d:DesignWidth="800"
+             d:DesignHeight="450"
              x:Class="MedicasMultibase.Vistas.NominasView">
-    <Grid RowDefinitions="*, Auto" Margin="5">
-        
-        <DataGrid Grid.Row="0" Name="GridNominas" 
-                  x:DataType="modelos:Nomina" 
-                  AutoGenerateColumns="False" IsReadOnly="True" 
-                  GridLinesVisibility="Horizontal" BorderThickness="1" 
-                  BorderBrush="#E0E0E0" RowBackground="White">
+
+    <Grid RowDefinitions="Auto,*,Auto" Margin="20">
+
+        <!-- ================= FORMULARIO ================= -->
+        <Border Grid.Row="0"
+                Background="#FAFAFA"
+                BorderBrush="#E0E0E0"
+                BorderThickness="1"
+                CornerRadius="10"
+                Padding="20"
+                Margin="0,0,0,15">
+
+            <Grid ColumnDefinitions="*,*"
+                  RowDefinitions="Auto,Auto,Auto,Auto,Auto">
+
+                <!-- TÍTULO -->
+                <TextBlock Grid.ColumnSpan="2"
+                           Text="Registro de Nómina"
+                           FontSize="18"
+                           FontWeight="Bold"
+                           Foreground="#B71C1C"
+                           Margin="0,0,0,15"/>
+
+                <!-- CENTRO -->
+                <StackPanel Grid.Row="1" Grid.Column="0" Margin="0,0,10,10">
+                    <TextBlock Text="Centro *" FontWeight="SemiBold"/>
+                    <ComboBox Name="cmbCentros"
+                              x:DataType="modelos:Centro"
+                              DisplayMemberBinding="{Binding NombreCentro}"
+                              PlaceholderText="Seleccione centro"/>
+                </StackPanel>
+
+                <!-- EMPLEADO -->
+                <StackPanel Grid.Row="1" Grid.Column="1" Margin="10,0,0,10">
+                    <TextBlock Text="Empleado *" FontWeight="SemiBold"/>
+                    <ComboBox Name="cmbEmpleados"
+                              x:DataType="modelos:Personal"
+                              DisplayMemberBinding="{Binding Nombre}"
+                              PlaceholderText="Seleccione empleado"/>
+                </StackPanel>
+
+                <!-- ESPECIALIDAD -->
+                <StackPanel Grid.Row="2" Grid.Column="0" Margin="0,0,10,10">
+                    <TextBlock Text="Especialidad *" FontWeight="SemiBold"/>
+                    <ComboBox Name="cmbEspecialidades"
+                              x:DataType="modelos:Especialidad"
+                              DisplayMemberBinding="{Binding NombreEspecialidad}"
+                              PlaceholderText="Seleccione especialidad"/>
+                </StackPanel>
+
+                <!-- SALARIO -->
+                <StackPanel Grid.Row="2" Grid.Column="1" Margin="10,0,0,10">
+                    <TextBlock Text="Salario *" FontWeight="SemiBold"/>
+                    <TextBox Name="txtSalario"/>
+                </StackPanel>
+
+                <!-- FECHA -->
+                <StackPanel Grid.Row="3" Grid.Column="0" Margin="0,0,10,10">
+                    <TextBlock Text="Fecha *" FontWeight="SemiBold"/>
+                    <DatePicker Name="dpFechaConsulta"/>
+                </StackPanel>
+
+                <!-- HORA -->
+                <StackPanel Grid.Row="3" Grid.Column="1" Margin="10,0,0,10">
+                    <TextBlock Text="Hora *" FontWeight="SemiBold"/>
+                    <TimePicker Name="tpHora"/>
+                </StackPanel>
+
+                <!-- BOTÓN -->
+                <Button Grid.Row="4"
+                        Grid.ColumnSpan="2"
+                        Content="Generar Nómina"
+                        Name="btnGuardar"
+                        Click="BtnGuardar_OnClick"
+                        HorizontalAlignment="Right"
+                        Width="180"
+                        Background="#D32F2F"
+                        Foreground="White"
+                        FontWeight="SemiBold"
+                        BorderThickness="0"
+                        Cursor="Hand"/>
+            </Grid>
+        </Border>
+
+        <!-- ================= TABLA ================= -->
+        <DataGrid Grid.Row="1"
+                  Name="GridNominas"
+                  x:DataType="modelos:Nomina"
+                  AutoGenerateColumns="False"
+                  IsReadOnly="True"
+                  GridLinesVisibility="Horizontal"
+                  BorderThickness="1"
+                  BorderBrush="#E0E0E0"
+                  Margin="0,0,0,10">
+
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Nodo (Origen)" Binding="{Binding OrigenDatos}" FontWeight="Bold" Foreground="#B71C1C"/>
-                <DataGridTextColumn Header="Cod Nómina" Binding="{Binding CodigoNomina}" />
-                <DataGridTextColumn Header="Centro" Binding="{Binding CodigoCentro}" />
-                <DataGridTextColumn Header="Empleado" Binding="{Binding CodigoEmpleado}" />
-                <DataGridTextColumn Header="Especialidad" Binding="{Binding CodigoEspecialidad}" />
-                <DataGridTextColumn Header="Salario Base" Binding="{Binding Salario, StringFormat={}{0:C2}}" Width="*" />
-                <DataGridTextColumn Header="Fecha Emisión" Binding="{Binding FechaConsulta}" />
+                <DataGridTextColumn Header="Origen"
+                                    Binding="{Binding OrigenDatos}" />
+
+                <DataGridTextColumn Header="Cod Centro"
+                                    Binding="{Binding CodigoCentro}" />
+
+                <DataGridTextColumn Header="Empleado"
+                                    Binding="{Binding CodigoEmpleado}" />
+
+                <DataGridTextColumn Header="Especialidad"
+                                    Binding="{Binding CodigoEspecialidad}" />
+
+                <DataGridTextColumn Header="Salario"
+                                    Binding="{Binding Salario, StringFormat={}{0:C2}}" />
+
+                <DataGridTextColumn Header="Fecha"
+                                    Binding="{Binding FechaConsulta, StringFormat={}{0:yyyy-MM-dd}}" />
+
+                <DataGridTextColumn Header="Hora"
+                                    Binding="{Binding Hora}" />
             </DataGrid.Columns>
         </DataGrid>
 
-        <StackPanel Grid.Row="1" Orientation="Horizontal" Spacing="10" HorizontalAlignment="Right">
-            <Button Content="Anular Nómina" Width="130" HorizontalContentAlignment="Center" 
-                    Background="White" Foreground="#D32F2F" BorderBrush="#D32F2F" BorderThickness="1" Cursor="Hand"/>
-            <Button Content="Revisar" Width="100" HorizontalContentAlignment="Center" 
-                    Background="#E0E0E0" Foreground="#333333" BorderThickness="0" Cursor="Hand"/>
-            <Button Content="Generar Nómina" Width="140" HorizontalContentAlignment="Center" 
-                    Background="#D32F2F" Foreground="White" FontWeight="SemiBold" BorderThickness="0" Cursor="Hand"/>
+        <!-- ================= ACCIONES ================= -->
+        <StackPanel Grid.Row="2"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right"
+                    Spacing="10"
+                    Margin="0,10,0,0">
+
+            <Button Content="Eliminar Seleccionado"
+                    Name="btnEliminar"
+                    Click="BtnEliminar_OnClick"
+                    Width="200"
+                    Background="White"
+                    Foreground="#D32F2F"
+                    BorderBrush="#D32F2F"
+                    BorderThickness="1"/>
+
+            <Button Content="Editar Seleccionado"
+                    Name="btnEditar"
+                    Click="BtnEditar_OnClick"
+                    Width="150"
+                    Background="#E0E0E0"/>
+
+            <Button Content="Limpiar"
+                    Name="btnLimpiar"
+                    Click="BtnLimpiar_OnClick"
+                    Width="120"
+                    Background="White"
+                    Foreground="#D32F2F"
+                    BorderBrush="#D32F2F"/>
         </StackPanel>
+
     </Grid>
 </UserControl>

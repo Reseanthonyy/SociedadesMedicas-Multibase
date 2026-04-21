@@ -3,34 +3,190 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:modelos="clr-namespace:MedicasMultibase.Modelos"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="MedicasMultibase.Vistas.PersonalView">
-    <Grid RowDefinitions="*, Auto" Margin="5">
-        
-        <DataGrid Grid.Row="0" Name="GridPersonal" 
-                  x:DataType="modelos:Personal" 
-                  AutoGenerateColumns="False" IsReadOnly="True" 
-                  GridLinesVisibility="Horizontal" BorderThickness="1" 
-                  BorderBrush="#E0E0E0" RowBackground="White">
+             mc:Ignorable="d"
+             d:DesignWidth="800"
+             d:DesignHeight="600"
+             x:Class="MedicasMultibase.Vistas.PersonalView"
+             Background="White">
+
+    <Grid RowDefinitions="Auto, *, Auto" Margin="15">
+
+        <!-- ================= FORMULARIO ================= -->
+        <Border Grid.Row="0"
+                BorderBrush="#E0E0E0"
+                BorderThickness="1"
+                CornerRadius="4"
+                Padding="15"
+                Margin="0,0,0,15"
+                Background="#FAFAFA">
+
+            <Grid RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto"
+                  ColumnDefinitions="*, *">
+
+                <TextBlock Grid.Row="0"
+                           Grid.ColumnSpan="2"
+                           Text="Registrar / Editar Personal"
+                           FontWeight="Bold"
+                           FontSize="16"
+                           Foreground="#B71C1C"
+                           Margin="0,0,0,15"/>
+
+                <!-- NOMBRE -->
+                <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Margin="0,0,0,10">
+                    <TextBlock Text="Nombre"
+                               FontWeight="SemiBold"
+                               Margin="0,0,0,5"/>
+                    <TextBox Name="txtNombre"
+                             Watermark="Nombre del empleado"
+                             Background="White"/>
+                </StackPanel>
+
+                <!-- DIRECCIÓN -->
+                <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Margin="0,0,0,10">
+                    <TextBlock Text="Dirección"
+                               FontWeight="SemiBold"
+                               Margin="0,0,0,5"/>
+                    <TextBox Name="txtDireccion"
+                             Watermark="Dirección"
+                             Background="White"/>
+                </StackPanel>
+
+                <!-- SALARIO -->
+                <StackPanel Grid.Row="3" Grid.Column="0" Margin="0,0,10,10">
+                    <TextBlock Text="Salario"
+                               FontWeight="SemiBold"
+                               Margin="0,0,0,5"/>
+                    <TextBox Name="txtSalario"
+                             Watermark="0.00"
+                             Background="White"/>
+                </StackPanel>
+
+                <!-- IRPF -->
+                <StackPanel Grid.Row="3" Grid.Column="1" Margin="0,0,0,10">
+                    <TextBlock Text="IRPF"
+                               FontWeight="SemiBold"
+                               Margin="0,0,0,5"/>
+                    <TextBox Name="txtIrpf"
+                             Watermark="0.00"
+                             Background="White"/>
+                </StackPanel>
+
+                <!-- FECHA CONTRATO -->
+                <StackPanel Grid.Row="4" Grid.Column="0" Margin="0,0,10,10">
+                    <TextBlock Text="Fecha Contrato"
+                               FontWeight="SemiBold"
+                               Margin="0,0,0,5"/>
+                    <DatePicker Name="dpFechaContrato"/>
+                </StackPanel>
+
+                <!-- COD CENTRO (COMBOBOX) -->
+                <StackPanel Grid.Row="4" Grid.Column="1" Margin="0,0,0,10">
+                    <TextBlock Text="Centro"
+                               FontWeight="SemiBold"
+                               Margin="0,0,0,5"/>
+                    <ComboBox Name="cmbCentros"
+                              x:DataType="modelos:Centro"
+                              DisplayMemberBinding="{Binding NombreCentro}"
+                              Background="White"
+                              PlaceholderText="Selecciona centro"/>
+                </StackPanel>
+
+                <!-- BOTÓN GUARDAR -->
+                <Button Grid.Row="5"
+                        Grid.ColumnSpan="2"
+                        Content="Guardar Personal"
+                        Name="btnGuardar"
+                        Click="BtnGuardar_OnClick"
+                        HorizontalAlignment="Right"
+                        Width="180"
+                        Background="#D32F2F"
+                        Foreground="White"
+                        FontWeight="SemiBold"
+                        BorderThickness="0"
+                        Cursor="Hand"/>
+
+            </Grid>
+        </Border>
+
+        <!-- ================= DATAGRID ================= -->
+        <DataGrid Grid.Row="1"
+                  Name="GridPersonal"
+                  x:DataType="modelos:Personal"
+                  AutoGenerateColumns="False"
+                  IsReadOnly="True"
+                  GridLinesVisibility="Horizontal"
+                  BorderThickness="1"
+                  BorderBrush="#E0E0E0"
+                  RowBackground="White"
+                  Margin="0,0,0,15">
+
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Nodo (Origen)" Binding="{Binding OrigenDatos}" FontWeight="Bold" Foreground="#B71C1C"/>
-                <DataGridTextColumn Header="Cod Empleado" Binding="{Binding CodigoEmpleado}" />
-                <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}" Width="*" />
-                <DataGridTextColumn Header="Dirección" Binding="{Binding Direccion}" Width="*" />
-                <DataGridTextColumn Header="Salario" Binding="{Binding Salario, StringFormat={}{0:C2}}" />
-                <DataGridTextColumn Header="IRPF" Binding="{Binding Irpf, StringFormat={}{0:C2}}" />
-                <DataGridTextColumn Header="Fecha Contrato" Binding="{Binding FechaContrato}" />
-                <DataGridTextColumn Header="Cod Centro" Binding="{Binding CodigoCentro}" />
+                <DataGridTextColumn Header="Origen"
+                                    Binding="{Binding OrigenDatos}"
+                                    FontWeight="Bold"
+                                    Foreground="#B71C1C"/>
+
+                <DataGridTextColumn Header="Empleado"
+                                    Binding="{Binding CodigoEmpleado}" />
+
+                <DataGridTextColumn Header="Nombre"
+                                    Binding="{Binding Nombre}"
+                                    Width="*" />
+
+                <DataGridTextColumn Header="Dirección"
+                                    Binding="{Binding Direccion}"
+                                    Width="*" />
+
+                <DataGridTextColumn Header="Salario"
+                                    Binding="{Binding Salario, StringFormat={}{0:C2}}" />
+
+                <DataGridTextColumn Header="IRPF"
+                                    Binding="{Binding Irpf, StringFormat={}{0:C2}}" />
+
+                <DataGridTextColumn Header="Fecha"
+                                    Binding="{Binding FechaContrato}" />
+
+                <DataGridTextColumn Header="Centro"
+                                    Binding="{Binding CodigoCentro}" />
             </DataGrid.Columns>
         </DataGrid>
 
-        <StackPanel Grid.Row="1" Orientation="Horizontal" Spacing="10" HorizontalAlignment="Right">
-            <Button Content="Despedir / Eliminar" Width="140" HorizontalContentAlignment="Center" 
-                    Background="White" Foreground="#D32F2F" BorderBrush="#D32F2F" BorderThickness="1" Cursor="Hand"/>
-            <Button Content="Editar" Width="100" HorizontalContentAlignment="Center" 
-                    Background="#E0E0E0" Foreground="#333333" BorderThickness="0" Cursor="Hand"/>
-            <Button Content="Alta Empleado" Width="140" HorizontalContentAlignment="Center" 
-                    Background="#D32F2F" Foreground="White" FontWeight="SemiBold" BorderThickness="0" Cursor="Hand"/>
+        <!-- ================= BOTONES ================= -->
+        <StackPanel Grid.Row="2"
+                    Orientation="Horizontal"
+                    Spacing="10"
+                    HorizontalAlignment="Right">
+
+            <Button Content="Eliminar"
+                    Name="btnEliminar"
+                    Click="BtnEliminar_OnClick"
+                    Width="120"
+                    Background="White"
+                    Foreground="#D32F2F"
+                    BorderBrush="#D32F2F"
+                    BorderThickness="1"
+                    Cursor="Hand"/>
+
+            <Button Content="Editar"
+                    Name="btnEditar"
+                    Click="BtnEditar_OnClick"
+                    Width="120"
+                    Background="#E0E0E0"
+                    Foreground="#333333"
+                    BorderThickness="0"
+                    Cursor="Hand"/>
+
+            <Button Content="Limpiar"
+                    Name="btnLimpiar"
+                    Click="BtnLimpiar_OnClick"
+                    Width="120"
+                    Background="White"
+                    Foreground="#D32F2F"
+                    BorderBrush="#D32F2F"
+                    BorderThickness="1"
+                    Cursor="Hand"/>
+
         </StackPanel>
+
     </Grid>
 </UserControl>

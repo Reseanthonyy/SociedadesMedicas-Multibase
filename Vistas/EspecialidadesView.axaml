@@ -3,30 +3,143 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:modelos="clr-namespace:MedicasMultibase.Modelos"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="MedicasMultibase.Vistas.EspecialidadesView">
-    <Grid RowDefinitions="*, Auto" Margin="5">
-        
-        <DataGrid Grid.Row="0" Name="GridEspecialidades" 
-                  x:DataType="modelos:Especialidad" 
-                  AutoGenerateColumns="False" IsReadOnly="True" 
-                  GridLinesVisibility="Horizontal" BorderThickness="1" 
-                  BorderBrush="#E0E0E0" RowBackground="White">
+             mc:Ignorable="d"
+             d:DesignWidth="800"
+             d:DesignHeight="600"
+             x:Class="MedicasMultibase.Vistas.EspecialidadesView"
+             Background="White">
+
+    <Grid RowDefinitions="Auto, *, Auto" Margin="15">
+
+        <!-- FORMULARIO -->
+        <Border Grid.Row="0"
+                BorderBrush="#E0E0E0"
+                BorderThickness="1"
+                CornerRadius="4"
+                Padding="15"
+                Margin="0,0,0,15"
+                Background="#FAFAFA">
+
+            <!-- 🔧 Ahora son 3 filas reales -->
+            <Grid RowDefinitions="Auto, Auto, Auto, Auto"
+                  ColumnDefinitions="*, *">
+
+                <TextBlock Grid.Row="0"
+                           Grid.ColumnSpan="2"
+                           Text="Registrar / Editar Especialidad"
+                           FontWeight="Bold"
+                           FontSize="16"
+                           Foreground="#B71C1C"
+                           Margin="0,0,0,15"/>
+
+                <!-- NOMBRE -->
+                <StackPanel Grid.Row="1"
+                            Grid.ColumnSpan="2"
+                            Margin="0,0,0,15">
+                    <TextBlock Text="Nombre"
+                               FontWeight="SemiBold"
+                               Foreground="#333333"
+                               Margin="0,0,0,5"/>
+                    <TextBox Name="txtNombreEspecialidad"
+                             Watermark="Nombre de la especialidad"
+                             Background="White"/>
+                </StackPanel>
+
+                <!-- DESCRIPCIÓN -->
+                <StackPanel Grid.Row="2"
+                            Grid.ColumnSpan="2"
+                            Margin="0,0,0,15">
+                    <TextBlock Text="Descripción"
+                               FontWeight="SemiBold"
+                               Foreground="#333333"
+                               Margin="0,0,0,5"/>
+                    <TextBox Name="txtDescripcion"
+                             Watermark="Descripción detallada"
+                             Background="White"/>
+                </StackPanel>
+
+                <!-- BOTÓN GUARDAR (ya no se encimará) -->
+                <Button Grid.Row="3"
+                        Grid.ColumnSpan="2"
+                        Content="Guardar Especialidad"
+                        Name="btnGuardar"
+                        Click="BtnGuardar_OnClick"
+                        HorizontalAlignment="Right"
+                        Width="180"
+                        Background="#D32F2F"
+                        Foreground="White"
+                        FontWeight="SemiBold"
+                        BorderThickness="0"
+                        Cursor="Hand"/>
+
+            </Grid>
+        </Border>
+
+        <!-- DATAGRID -->
+        <DataGrid Grid.Row="1"
+                  Name="GridEspecialidades"
+                  x:DataType="modelos:Especialidad"
+                  AutoGenerateColumns="False"
+                  IsReadOnly="True"
+                  GridLinesVisibility="Horizontal"
+                  BorderThickness="1"
+                  BorderBrush="#E0E0E0"
+                  RowBackground="White"
+                  Margin="0,0,0,15">
+
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Nodo (Origen)" Binding="{Binding OrigenDatos}" FontWeight="Bold" Foreground="#B71C1C"/>
-                <DataGridTextColumn Header="Cod Especialidad" Binding="{Binding CodigoEspecialidad}" />
-                <DataGridTextColumn Header="Nombre" Binding="{Binding NombreEspecialidad}" Width="*" />
-                <DataGridTextColumn Header="Descripción" Binding="{Binding Descripcion}" Width="2*" />
+                <DataGridTextColumn Header="Nodo (Origen)"
+                                    Binding="{Binding OrigenDatos}"
+                                    FontWeight="Bold"
+                                    Foreground="#B71C1C"/>
+                <DataGridTextColumn Header="Cod Especialidad"
+                                    Binding="{Binding CodigoEspecialidad}" />
+                <DataGridTextColumn Header="Nombre"
+                                    Binding="{Binding NombreEspecialidad}"
+                                    Width="*" />
+                <DataGridTextColumn Header="Descripción"
+                                    Binding="{Binding Descripcion}"
+                                    Width="2*" />
             </DataGrid.Columns>
+
         </DataGrid>
 
-        <StackPanel Grid.Row="1" Orientation="Horizontal" Spacing="10" HorizontalAlignment="Right">
-            <Button Content="Eliminar" Width="100" HorizontalContentAlignment="Center" 
-                    Background="White" Foreground="#D32F2F" BorderBrush="#D32F2F" BorderThickness="1" Cursor="Hand"/>
-            <Button Content="Editar" Width="100" HorizontalContentAlignment="Center" 
-                    Background="#E0E0E0" Foreground="#333333" BorderThickness="0" Cursor="Hand"/>
-            <Button Content="Nueva Especialidad" Width="150" HorizontalContentAlignment="Center" 
-                    Background="#D32F2F" Foreground="White" FontWeight="SemiBold" BorderThickness="0" Cursor="Hand"/>
+        <!-- BOTONES ACCIONES -->
+        <StackPanel Grid.Row="2"
+                    Orientation="Horizontal"
+                    Spacing="10"
+                    HorizontalAlignment="Right">
+
+            <Button Content="Eliminar"
+                    Name="btnEliminar"
+                    Click="BtnEliminar_OnClick"
+                    Width="120"
+                    Background="White"
+                    Foreground="#D32F2F"
+                    BorderBrush="#D32F2F"
+                    BorderThickness="1"
+                    Cursor="Hand"/>
+
+            <Button Content="Limpiar"
+                    Name="btnLimpiar"
+                    Click="BtnLimpiar_OnClick"
+                    Width="120"
+                    Background="White"
+                    Foreground="#D32F2F"
+                    BorderBrush="#D32F2F"
+                    BorderThickness="1"
+                    Cursor="Hand"/>
+
+            <Button Content="Editar"
+                    Name="btnEditar"
+                    Click="BtnEditar_OnClick"
+                    Width="120"
+                    Background="#E0E0E0"
+                    Foreground="#333333"
+                    BorderThickness="0"
+                    Cursor="Hand"/>
+
         </StackPanel>
+
     </Grid>
 </UserControl>

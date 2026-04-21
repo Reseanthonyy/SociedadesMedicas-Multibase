@@ -105,6 +105,17 @@
                     HorizontalAlignment="Right">
 
             <Button Content="Eliminar Seleccionado"
+                    Name="btnEliminar"
+                    Click="BtnEliminar_OnClick"
+                    Width="160"
+                    Background="White"
+                    Foreground="#D32F2F"
+                    BorderBrush="#D32F2F"
+                    BorderThickness="1"
+                    Cursor="Hand"/>
+            <Button Content="Limpiar"
+                    Name="btnLimpiar"
+                    Click="BtnLimpiar_OnClick"
                     Width="160"
                     Background="White"
                     Foreground="#D32F2F"
@@ -114,6 +125,8 @@
 
             <Button Content="Editar Seleccionado"
                     Width="160"
+                    Name="btnEditar"
+                    Click="BtnEditar_OnClick"
                     Background="#E0E0E0"
                     Foreground="#333333"
                     BorderThickness="0"
