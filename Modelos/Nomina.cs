@@ -12,4 +12,9 @@ public class Nomina
     public decimal Salario { get; set; }
     public DateTime FechaConsulta { get; set; }
     public TimeSpan Hora { get; set; }
+    
+    //Extras
+    public string NombreCentro { get; set; } = string.Empty;
+    public string NombrePersonal { get; set; } = string.Empty;
+    public string NombreEspecialidad { get; set; } = string.Empty;
 }

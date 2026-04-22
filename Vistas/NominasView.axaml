@@ -104,16 +104,18 @@
 
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Origen"
-                                    Binding="{Binding OrigenDatos}" />
+                                    Binding="{Binding OrigenDatos}" 
+                                    FontWeight="Bold"
+                                    Foreground="#B71C1C"/>
 
-                <DataGridTextColumn Header="Cod Centro"
-                                    Binding="{Binding CodigoCentro}" />
+                <DataGridTextColumn Header="Centro"
+                                    Binding="{Binding NombreCentro}" />
 
                 <DataGridTextColumn Header="Empleado"
-                                    Binding="{Binding CodigoEmpleado}" />
+                                    Binding="{Binding NombrePersonal}" />
 
                 <DataGridTextColumn Header="Especialidad"
-                                    Binding="{Binding CodigoEspecialidad}" />
+                                    Binding="{Binding NombreEspecialidad}" />
 
                 <DataGridTextColumn Header="Salario"
                                     Binding="{Binding Salario, StringFormat={}{0:C2}}" />

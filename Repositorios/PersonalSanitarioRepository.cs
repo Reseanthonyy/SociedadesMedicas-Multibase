@@ -10,6 +10,7 @@ namespace MedicasMultibase.Repositorios;
 
 public class PersonalSanitarioRepository
 {
+
     /* ===============================
        OBTENER PERSONAL SANITARIO
        ===============================*/
@@ -42,10 +43,13 @@ public class PersonalSanitarioRepository
         await conexion.OpenAsync();
 
         string query = @"SELECT 
-                            codigo_empleado,
-                            funcion,
-                            anios_experiencia
-                         FROM personales_sanitarios";
+                            ps.codigo_empleado,
+                            p.nombre,
+                            ps.funcion,
+                            ps.anios_experiencia
+                         FROM personales_sanitarios ps
+                         INNER JOIN personales p
+                             ON ps.codigo_empleado = p.codigo_empleado";
 
         using var cmd = new SqlCommand(query, conexion);
 
@@ -57,8 +61,9 @@ public class PersonalSanitarioRepository
             {
                 OrigenDatos = proveedor,
                 CodigoEmpleado = reader.GetInt32(0),
-                Funcion = reader.GetString(1),
-                AniosExperiencia = reader.GetInt32(2)
+                NombreEmpleado = reader.GetString(1),
+                Funcion = reader.GetString(2),
+                AniosExperiencia = reader.GetInt32(3)
             });
         }
 
@@ -74,10 +79,13 @@ public class PersonalSanitarioRepository
         await conexion.OpenAsync();
 
         string query = @"SELECT 
-                            codigo_empleado,
-                            funcion,
-                            anios_experiencia
-                         FROM personales_sanitarios";
+                            ps.codigo_empleado,
+                            p.nombre,
+                            ps.funcion,
+                            ps.anios_experiencia
+                         FROM personales_sanitarios ps
+                         INNER JOIN personales p
+                             ON ps.codigo_empleado = p.codigo_empleado";
 
         using var cmd = new MySqlCommand(query, conexion);
 
@@ -89,8 +97,9 @@ public class PersonalSanitarioRepository
             {
                 OrigenDatos = "Aldana",
                 CodigoEmpleado = reader.GetInt32(0),
-                Funcion = reader.GetString(1),
-                AniosExperiencia = reader.GetInt32(2)
+                NombreEmpleado = reader.GetString(1),
+                Funcion = reader.GetString(2),
+                AniosExperiencia = reader.GetInt32(3)
             });
         }
 

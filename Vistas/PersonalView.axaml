@@ -147,7 +147,7 @@
                                     Binding="{Binding FechaContrato}" />
 
                 <DataGridTextColumn Header="Centro"
-                                    Binding="{Binding CodigoCentro}" />
+                                    Binding="{Binding NombreCentro}" />
             </DataGrid.Columns>
         </DataGrid>
 

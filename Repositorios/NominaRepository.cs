@@ -42,14 +42,28 @@ public class NominaRepository
         await conexion.OpenAsync();
 
         string query = @"SELECT 
-                            codigo_nomina,
-                            codigo_centro,
-                            codigo_empleado,
-                            codigo_especialidad,
-                            salario,
-                            fecha_consulta,
-                            hora
-                         FROM nominas";
+                            n.codigo_nomina,
+                            n.codigo_centro,
+                            n.codigo_empleado,
+                            n.codigo_especialidad,
+                            n.salario,
+                            n.fecha_consulta,
+                            n.hora,
+
+                            c.nombre_centro,
+                            p.nombre,
+                            e.nombre_especialidad
+
+                         FROM nominas n
+
+                         INNER JOIN centros c
+                            ON n.codigo_centro = c.codigo_centro
+
+                         INNER JOIN personales p
+                            ON n.codigo_empleado = p.codigo_empleado
+
+                         INNER JOIN especialidades e
+                            ON n.codigo_especialidad = e.codigo_especialidad";
 
         using var cmd = new SqlCommand(query, conexion);
 
@@ -60,13 +74,18 @@ public class NominaRepository
             lista.Add(new Nomina
             {
                 OrigenDatos = proveedor,
+
                 CodigoNomina = reader.GetInt32(0),
                 CodigoCentro = reader.GetInt32(1),
                 CodigoEmpleado = reader.GetInt32(2),
                 CodigoEspecialidad = reader.GetInt32(3),
                 Salario = reader.GetDecimal(4),
                 FechaConsulta = reader.GetDateTime(5),
-                Hora = reader.GetTimeSpan(6)
+                Hora = reader.GetTimeSpan(6),
+
+                NombreCentro = reader.GetString(7),
+                NombrePersonal = reader.GetString(8),
+                NombreEspecialidad = reader.GetString(9)
             });
         }
 
@@ -82,14 +101,28 @@ public class NominaRepository
         await conexion.OpenAsync();
 
         string query = @"SELECT 
-                            codigo_nomina,
-                            codigo_centro,
-                            codigo_empleado,
-                            codigo_especialidad,
-                            salario,
-                            fecha_consulta,
-                            hora
-                         FROM nominas";
+                            n.codigo_nomina,
+                            n.codigo_centro,
+                            n.codigo_empleado,
+                            n.codigo_especialidad,
+                            n.salario,
+                            n.fecha_consulta,
+                            n.hora,
+
+                            c.nombre_centro,
+                            p.nombre,
+                            e.nombre_especialidad
+
+                         FROM nominas n
+
+                         INNER JOIN centros c
+                            ON n.codigo_centro = c.codigo_centro
+
+                         INNER JOIN personales p
+                            ON n.codigo_empleado = p.codigo_empleado
+
+                         INNER JOIN especialidades e
+                            ON n.codigo_especialidad = e.codigo_especialidad";
 
         using var cmd = new MySqlCommand(query, conexion);
 
@@ -100,15 +133,21 @@ public class NominaRepository
             lista.Add(new Nomina
             {
                 OrigenDatos = "Aldana",
+
                 CodigoNomina = reader.GetInt32(0),
                 CodigoCentro = reader.GetInt32(1),
                 CodigoEmpleado = reader.GetInt32(2),
                 CodigoEspecialidad = reader.GetInt32(3),
                 Salario = reader.GetDecimal(4),
                 FechaConsulta = reader.GetDateTime(5),
+
                 Hora = reader.IsDBNull(6)
                     ? TimeSpan.Zero
-                    : reader.GetTimeSpan(6)
+                    : reader.GetTimeSpan(6),
+
+                NombreCentro = reader.GetString(7),
+                NombrePersonal = reader.GetString(8),
+                NombreEspecialidad = reader.GetString(9)
             });
         }
 

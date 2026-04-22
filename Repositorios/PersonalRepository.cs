@@ -42,14 +42,17 @@ public class PersonalRepository
         await conexion.OpenAsync();
 
         string query = @"SELECT 
-                            codigo_empleado,
-                            nombre,
-                            direccion,
-                            salario,
-                            irpf,
-                            fecha_contrato,
-                            codigo_centro
-                         FROM personales";
+                            p.codigo_empleado,
+                            p.nombre,
+                            p.direccion,
+                            p.salario,
+                            p.irpf,
+                            p.fecha_contrato,
+                            p.codigo_centro,
+                            c.nombre_centro
+                         FROM personales p
+                         INNER JOIN centros c
+                            ON p.codigo_centro = c.codigo_centro";
 
         using var cmd = new SqlCommand(query, conexion);
 
@@ -66,7 +69,10 @@ public class PersonalRepository
                 Salario = reader.GetDecimal(3),
                 Irpf = reader.GetDecimal(4),
                 FechaContrato = reader.GetDateTime(5),
-                CodigoCentro = reader.GetInt32(6)
+                CodigoCentro = reader.GetInt32(6),
+                NombreCentro = reader.IsDBNull(7)
+                                ? ""
+                                : reader.GetString(7)
             });
         }
 
@@ -82,14 +88,17 @@ public class PersonalRepository
         await conexion.OpenAsync();
 
         string query = @"SELECT 
-                            codigo_empleado,
-                            nombre,
-                            direccion,
-                            salario,
-                            irpf,
-                            fecha_contrato,
-                            codigo_centro
-                         FROM personales";
+                            p.codigo_empleado,
+                            p.nombre,
+                            p.direccion,
+                            p.salario,
+                            p.irpf,
+                            p.fecha_contrato,
+                            p.codigo_centro,
+                            c.nombre_centro
+                         FROM personales p
+                         INNER JOIN centros c
+                            ON p.codigo_centro = c.codigo_centro";
 
         using var cmd = new MySqlCommand(query, conexion);
 
@@ -106,7 +115,10 @@ public class PersonalRepository
                 Salario = reader.GetDecimal(3),
                 Irpf = reader.GetDecimal(4),
                 FechaContrato = reader.GetDateTime(5),
-                CodigoCentro = reader.GetInt32(6)
+                CodigoCentro = reader.GetInt32(6),
+                NombreCentro = reader.IsDBNull(7)
+                                ? ""
+                                : reader.GetString(7)
             });
         }
 

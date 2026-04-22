@@ -41,14 +41,33 @@ public class ConsultaRepository
 
         await conexion.OpenAsync();
 
-        string query = @"SELECT 
-                            codigo_consulta,
-                            codigo_centro,
-                            codigo_empleado,
-                            codigo_especialidad,
-                            dia_semana,
-                            hora
-                         FROM consultas";
+        string query = @"
+        SELECT 
+            c.codigo_consulta,
+
+            c.codigo_centro,
+            ce.nombre_centro,
+
+            c.codigo_empleado,
+            p.nombre,
+
+            c.codigo_especialidad,
+            e.nombre_especialidad,
+
+            c.dia_semana,
+            c.hora
+
+        FROM consultas c
+
+        INNER JOIN centros ce
+            ON c.codigo_centro = ce.codigo_centro
+
+        INNER JOIN personales p
+            ON c.codigo_empleado = p.codigo_empleado
+
+        INNER JOIN especialidades e
+            ON c.codigo_especialidad = e.codigo_especialidad
+    ";
 
         using var cmd = new SqlCommand(query, conexion);
 
@@ -59,12 +78,21 @@ public class ConsultaRepository
             lista.Add(new Consulta
             {
                 OrigenDatos = proveedor,
+
                 CodigoConsulta = reader.GetInt32(0),
+
                 CodigoCentro = reader.GetInt32(1),
-                CodigoEmpleado = reader.GetInt32(2),
-                CodigoEspecialidad = reader.GetInt32(3),
-                DiaSemana = reader.GetDateTime(4),
-                Hora = reader.GetTimeSpan(5)
+                NombreCentro = reader.GetString(2),
+
+                CodigoEmpleado = reader.GetInt32(3),
+                NombreEmpleado = reader.GetString(4),
+
+                CodigoEspecialidad = reader.GetInt32(5),
+                NombreEspecialidad = reader.GetString(6),
+
+                DiaSemana = reader.GetDateTime(7),
+
+                Hora = reader.GetTimeSpan(8)
             });
         }
 
@@ -79,14 +107,33 @@ public class ConsultaRepository
 
         await conexion.OpenAsync();
 
-        string query = @"SELECT 
-                            codigo_consulta,
-                            codigo_centro,
-                            codigo_empleado,
-                            codigo_especialidad,
-                            dia_semana,
-                            hora
-                         FROM consultas";
+        string query = @"
+        SELECT 
+            c.codigo_consulta,
+
+            c.codigo_centro,
+            ce.nombre_centro,
+
+            c.codigo_empleado,
+            p.nombre,
+
+            c.codigo_especialidad,
+            e.nombre_especialidad,
+
+            c.dia_semana,
+            c.hora
+
+        FROM consultas c
+
+        INNER JOIN centros ce
+            ON c.codigo_centro = ce.codigo_centro
+
+        INNER JOIN personales p
+            ON c.codigo_empleado = p.codigo_empleado
+
+        INNER JOIN especialidades e
+            ON c.codigo_especialidad = e.codigo_especialidad
+    ";
 
         using var cmd = new MySqlCommand(query, conexion);
 
@@ -97,14 +144,23 @@ public class ConsultaRepository
             lista.Add(new Consulta
             {
                 OrigenDatos = "Aldana",
+
                 CodigoConsulta = reader.GetInt32(0),
+
                 CodigoCentro = reader.GetInt32(1),
-                CodigoEmpleado = reader.GetInt32(2),
-                CodigoEspecialidad = reader.GetInt32(3),
-                DiaSemana = reader.GetDateTime(4),
-                Hora = reader.IsDBNull(5)
+                NombreCentro = reader.GetString(2),
+
+                CodigoEmpleado = reader.GetInt32(3),
+                NombreEmpleado = reader.GetString(4),
+
+                CodigoEspecialidad = reader.GetInt32(5),
+                NombreEspecialidad = reader.GetString(6),
+
+                DiaSemana = reader.GetDateTime(7),
+
+                Hora = reader.IsDBNull(8)
                     ? TimeSpan.Zero
-                    : reader.GetTimeSpan(5)
+                    : reader.GetTimeSpan(8)
             });
         }
 

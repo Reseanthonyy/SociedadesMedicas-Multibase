@@ -12,4 +12,7 @@ public class Personal
     public decimal Irpf { get; set; }
     public DateTime FechaContrato { get; set; }
     public int CodigoCentro { get; set; }
+    
+    //Extra
+    public string NombreCentro { get; set; } = string.Empty;
 }

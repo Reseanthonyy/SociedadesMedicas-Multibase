@@ -111,8 +111,8 @@
                                     FontWeight="Bold"
                                     Foreground="#B71C1C"/>
 
-                <DataGridTextColumn Header="Cod Empleado"
-                                    Binding="{Binding CodigoEmpleado}" />
+                <DataGridTextColumn Header="Empleado"
+                                    Binding="{Binding NombreEmpleado}" />
 
                 <DataGridTextColumn Header="Función"
                                     Binding="{Binding Funcion}"

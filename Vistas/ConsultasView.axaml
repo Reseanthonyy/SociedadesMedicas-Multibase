@@ -91,21 +91,27 @@
                   BorderBrush="#E0E0E0">
 
             <DataGrid.Columns>
+                <DataGridTextColumn Header="Origen"
+                                    x:DataType="modelos:Consulta"
+                                    Binding="{Binding OrigenDatos}"
+                                    FontWeight="Bold"
+                                    Foreground="#B71C1C"/>
+                
                 <DataGridTextColumn Header="ID"
                                     x:DataType="modelos:Consulta"
                                     Binding="{Binding CodigoConsulta}" />
 
                 <DataGridTextColumn Header="Centro"
                                     x:DataType="modelos:Consulta"
-                                    Binding="{Binding CodigoCentro}" />
+                                    Binding="{Binding NombreCentro}" />
 
                 <DataGridTextColumn Header="Empleado"
                                     x:DataType="modelos:Consulta"
-                                    Binding="{Binding CodigoEmpleado}" />
+                                    Binding="{Binding NombreEmpleado}" />
 
                 <DataGridTextColumn Header="Especialidad"
                                     x:DataType="modelos:Consulta"
-                                    Binding="{Binding CodigoEspecialidad}" />
+                                    Binding="{Binding NombreEspecialidad}" />
 
                 <DataGridTextColumn Header="Fecha"
                                     x:DataType="modelos:Consulta"
