@@ -11,8 +11,8 @@ public static class ConexionesSqlServer
                                           "Password=Pandacabrensexcel8#;" +
                                           "TrustServerCertificate=True;";
     
-    private static string _conexionCruz = "Server=10.10.11.112;" +
-                                            "Database=arteza_db;" +
+    private static string _conexionCruz = "Server=10.10.23.251;" +
+                                            "Database=sociedades_medicas;" +
                                             "User Id=usuarios_remotos;" +
                                             "Password=Contraseña8#;" +
                                             "TrustServerCertificate=True;";

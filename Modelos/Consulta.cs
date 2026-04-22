@@ -11,4 +11,11 @@ public class Consulta
     public int CodigoEspecialidad { get; set; }
     public DateTime DiaSemana { get; set; }
     public TimeSpan Hora { get; set; }
+    
+    //Para mostrar nombres
+    public string NombreCentro { get; set; } = string.Empty;
+
+    public string NombreEmpleado { get; set; } = string.Empty;
+
+    public string NombreEspecialidad { get; set; }  = string.Empty;
 }
